@@ -29,7 +29,7 @@ public class ServicoPetLoverMapTest {
         animalValido = new Animal(3, "Bela", "Cachorro",
                 "Pinscher", Tamanho.MEDIO, 5, tutorValido);
 
-        servicoValido = new Banho(1, animalValido,new DataMarcadaServico(1,1,2003,13,30),Tamanho.MEDIO,"Dr.João",100.0, 10.0,"Banho à seco");
+        servicoValido = new Banho(1, animalValido,new DataMarcadaServico(1,1,2003),Tamanho.MEDIO,"Dr.João",100.0, 10.0,"Banho à seco");
 
         gerarReciboPDF = new ServicoRecibosPDFSystem();
     }
@@ -65,9 +65,9 @@ public class ServicoPetLoverMapTest {
 
     @Test
     void testListarServiçosPendentes(){
-        Servico servicoPendente = new Consulta(2, animalValido,new DataMarcadaServico(2,2,2002,22,22),animalValido.getTamanho(),
+        Servico servicoPendente = new Consulta(2, animalValido,new DataMarcadaServico(2,2,2002),animalValido.getTamanho(),
                 "Dra.Isadora",  100.00,
-                20.0,"Consulta de rotina");
+                20.0,"Consulta de rotina",100,50);
 
         sistema.cadastrarServico(servicoPendente);
 
@@ -77,7 +77,7 @@ public class ServicoPetLoverMapTest {
 
     @Test
     void testAdicionarServico(){
-        Servico novoServico = new Banho(3, animalValido, new DataMarcadaServico(3,3,2003,23,33),animalValido.getTamanho(),
+        Servico novoServico = new Banho(3, animalValido, new DataMarcadaServico(3,3,2003),animalValido.getTamanho(),
                 "Dr Igor Meira",75.00, 15.0, "Banho à seco");
 
         try {

@@ -8,7 +8,7 @@ public class Consulta extends Servico{
 
     public Consulta(int id, Animal animal, DataMarcadaServico dataMarcada,
                     Tamanho tamanho, String funcionario,
-                    double valorBase, double percetualAcrescimoTamanho, String descricao) {
+                    double valorBase, double percetualAcrescimoTamanho, String descricao, double valorVacina, double valorMedicamento) {
 
         super(id, animal,dataMarcada, tamanho, funcionario, valorBase, percetualAcrescimoTamanho);
         this.valorVacina = valorVacina;

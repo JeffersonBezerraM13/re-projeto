@@ -4,15 +4,11 @@ public class DataMarcadaServico{
     private int dia;
     private int mes;
     private int ano;
-    private int hora;
-    private int minutos;
 
-    public DataMarcadaServico(int dia, int mes, int ano, int hora, int minutos) {
+    public DataMarcadaServico(int dia, int mes, int ano) {
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
-        this.hora = hora;
-        this.minutos = minutos;
     }
 
     public int getDia() {
@@ -39,24 +35,9 @@ public class DataMarcadaServico{
         this.ano = ano;
     }
 
-    public int getHora() {
-        return hora;
-    }
-
-    public void setHora(int hora) {
-        this.hora = hora;
-    }
-
-    public int getMinutos() {
-        return minutos;
-    }
-
-    public void setMinutos(int minutos) {
-        this.minutos = minutos;
-    }
 
     @Override
     public String toString(){
-        return (this.dia+"/"+this.mes+"/"+this.ano+" - "+this.hora+"-"+this.minutos);
+        return (this.dia+"/"+this.mes+"/"+this.ano);
     }
 }
