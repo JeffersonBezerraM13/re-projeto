@@ -35,6 +35,15 @@ public class ServicoPetLoverMap implements ServicoInterface {
     }
 
     @Override
+    public void atualizarServico(int id, Servico servico) {
+        if(this.servicos.containsKey(id)){
+            this.servicos.get(id).atualizarServico(servico);
+        } else {
+            throw new ServicoNaoExisteException("O serviço que você quer atualizar não existe");
+        }
+    }
+
+    @Override
     public Collection<Servico> listarServicosDoDia() throws NaoHaServicosDoDiaException {
         LocalDateTime dataDeHoje = LocalDateTime.now();
         Collection<Servico> servicosDoDia = new ArrayList<>();

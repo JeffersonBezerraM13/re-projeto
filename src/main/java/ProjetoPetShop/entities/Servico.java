@@ -25,45 +25,13 @@ public abstract class Servico {
         this.percentualAcrescimoTamanho = percentualAcrescimoTamanho; //caso queira botar a porcetagem inteiro é só dividir por 100 esse valor
     }
 
-//    public String gerarRecibo(){
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-//        return String.format(
-//                "PetLover\n" +
-//                        "----------------------------------\n" +
-//                        "RECIBO DE ATENDIMENTO\n" +
-//                        "Data/Hora: %s\n" +
-//                        "Animal: %s (%s)\n" +
-//                        "Tutor: %s\n" +
-//                        "CPF Tutor: %s\n" +
-//                        "----------------------------------\n" +
-//                        "Serviço: %s\n" +
-//                        "Responsável: %s\n" +
-//                        "Valor Base: R$ %.2f\n" +
-//                        "%s" +  // Detalhes específicos do serviço
-//                        "----------------------------------\n" +
-//                        "VALOR TOTAL: R$ %.2f\n" +
-//                        "Status: %s\n" +
-//                        "----------------------------------\n" +
-//                        "Assinatura do Veterinário: ________________\n",
-//                dataHora.format(formatter),
-//                animal.getNome(),
-//                animal.getEspecie(),
-//                animal.getTutor().getNome(),
-//                animal.getTutor().getCpf(),
-//                this.getClass().getSimpleName(),
-//                veterinario,
-//                valorBase,
-//                getDetalhesServico(),
-//                calcularValorTotal(),
-//                pago ? "PAGO" : "PENDENTE"
-//        );
-//    }
+    public abstract double calcularValorTotal();
 
-    abstract double calcularValorTotal();
-
-    abstract String getDetalhesServico();
+    public abstract String getDetalhesServico();
 
     abstract double calcularAcrescimo();
+
+    public abstract void atualizarServico(Servico servicoParaAtualziar);
 
     public int getId() {
         return id;

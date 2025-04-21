@@ -4,6 +4,7 @@ import ProjetoPetShop.exception.AnimalJaExisteException;
 import ProjetoPetShop.exception.AnimalNaoExisteException;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +21,6 @@ public class Tutor implements Serializable {
     private String endereço;
     private String email;
     List<Animal> animais;
-    private int quantAnimal;
 
     public Tutor(String nome, String cpf, String telefone, String endereço, String email) {
         this.nome = nome;
@@ -28,30 +28,62 @@ public class Tutor implements Serializable {
         this.telefone = telefone;
         this.endereço = endereço;
         this.email = email;
+        this.animais = new ArrayList<>();
     }
 
-    public void cadastrarAnimal(String nome, String especie, String raca, Tamanho tamanho, int idade) throws AnimalJaExisteException{
-        Animal animalCadastro = new Animal(this.animais.size(),nome,especie,raca,tamanho,idade,this.cpf);
-        for(Animal a: this.animais){
-            if(a.equals(animalCadastro)) throw new AnimalJaExisteException("O Animal de nome "+nome+" do tutor "+this.nome);
-            else animais.add(animalCadastro);
+    public void atualizarTutor(Tutor tutorParaAtualizar){
+        if(tutorParaAtualizar.nome != null){
+            this.nome = tutorParaAtualizar.getNome();
+        } else if (tutorParaAtualizar.getCpf() != null){
+            this.cpf = tutorParaAtualizar.getCpf();
+        } else if (tutorParaAtualizar.getTelefone() != null){
+            this.telefone = tutorParaAtualizar.getTelefone();
+        } else if (tutorParaAtualizar.getEndereço() != null){
+            this.endereço = tutorParaAtualizar.getEndereço();
+        } else if (tutorParaAtualizar.getEmail() != null){
+            this.email = tutorParaAtualizar.getEmail();
+        }
+    }
+
+    public void cadastrarAnimal(String nome, String especie, String raca, Tamanho tamanho, int idade, Tutor tutor) throws AnimalJaExisteException{
+        Animal animalCadastro = new Animal(this.animais.size(),nome,especie,raca,tamanho,idade, tutor);
+        if(this.animais.isEmpty()){
+            this.animais.add(animalCadastro);
+        } else {
+            for(Animal a: this.animais){
+                if(a.getNome().equalsIgnoreCase(nome)){
+                    throw new AnimalJaExisteException("O pet: "+nome+" do tutor "+this.nome+" já está cadastrado");
+                }
+            }
+            this.animais.add(animalCadastro);
         }
     }
 
     public Animal getAnimal(String nome) throws AnimalNaoExisteException{
-        for(Animal a: this.animais)
-            if(a.getNome().equalsIgnoreCase(nome))
+        for(Animal a: this.animais){
+            if(a.getNome().equalsIgnoreCase(nome)){
                 return a;
-        throw new AnimalNaoExisteException("O pet "+this.nome+" do tutor "+this.nome+" cpf "+this.cpf+" não existe");
+            }
+        }
+        throw new AnimalNaoExisteException("O pet "+nome+" do tutor "+this.nome+" cpf "+this.cpf+" não existe");
     }
 
     public void removerAnimal(String nome) throws AnimalNaoExisteException{
-        for(Animal a: this.animais){
-            if(a.getNome().equalsIgnoreCase(nome)){
-                this.animais.remove(a);
+        if(this.animais.isEmpty()){
+            throw new AnimalNaoExisteException("Não há animais cadastrados para esse tutor");
+        } else {
+            for(Animal a: this.animais){
+                if(a.getNome().equalsIgnoreCase(nome)){
+                    this.animais.remove(a);
+                    return;
+                }
             }
+            throw new AnimalNaoExisteException("O animal de nome "+nome+" do tutor "+this.nome);
         }
-        throw new AnimalNaoExisteException("O animal de nome "+nome+" do tutor "+this.nome);
+    }
+
+    public void limparListaDeAnimais(){
+        this.animais.clear();
     }
 
     public String getNome() {

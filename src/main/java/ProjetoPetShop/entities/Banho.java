@@ -10,9 +10,8 @@ public class Banho extends Servico {
         super(id, animal, dataMarcada, tamanho, funcionario, valorBase, percentualAcrescimoTamanho);
         this.descricao = descricao;
     }
-
     @Override
-    double calcularValorTotal() {
+    public double calcularValorTotal() {
         return super.valorBase+calcularAcrescimo();
     }
 
@@ -29,6 +28,28 @@ public class Banho extends Servico {
     @Override
     public double calcularAcrescimo() {
         return super.valorBase*super.percentualAcrescimoTamanho;
+    }
+
+    @Override
+    public void atualizarServico(Servico servicoParaAtualziar) {
+        Banho banhoParaAtualizar = (Banho) servicoParaAtualziar;
+        if (banhoParaAtualizar.getId() > 0){
+            this.id = banhoParaAtualizar.getId();
+        } else if (banhoParaAtualizar.getAnimal() != null){
+            this.animal = banhoParaAtualizar.getAnimal();
+        } else if (banhoParaAtualizar.getDataMarcada() != null){
+            this.dataMarcada = banhoParaAtualizar.getDataMarcada();
+        } else if (banhoParaAtualizar.getTamanho() != null){
+            this.tamanho = banhoParaAtualizar.getTamanho();
+        } else if (banhoParaAtualizar.funcionario != null){
+            this.funcionario = banhoParaAtualizar.getFuncionario();
+        } else if (banhoParaAtualizar.getValorBase() > 0.0){
+            this.valorBase = banhoParaAtualizar.getValorBase();
+        } else if (banhoParaAtualizar.getPercentualAcrescimoTamanho() > 0.0){
+            this.percentualAcrescimoTamanho = banhoParaAtualizar.getPercentualAcrescimoTamanho();
+        } else if (banhoParaAtualizar.getDescricao() != null){
+            this.descricao = banhoParaAtualizar.getDescricao();
+        }
     }
 
     public String getDescricao() {

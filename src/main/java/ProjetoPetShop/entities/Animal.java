@@ -1,7 +1,6 @@
 package ProjetoPetShop.entities;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * Representa um animal de estimação no sistema do PetLover.
@@ -15,17 +14,32 @@ public class Animal implements Serializable {
     private String raca;
     private Tamanho tamanho;
     private int idade;
-    private String cpfDoTutor;
+    private Tutor tutor;
     //private List<Servico> servicosFeitos;
 
-    public Animal(int codigo,String nome, String especie, String raca, Tamanho tamanho,int idade, String cpfDoTutor) {
+    public Animal(int codigo,String nome, String especie, String raca, Tamanho tamanho,int idade, Tutor tutor) {
         this.codigo = codigo;
         this.nome = nome;
         this.especie = especie;
         this.raca = raca;
         this.tamanho = tamanho;
         this.idade = idade;
-        this.cpfDoTutor = cpfDoTutor;
+        this.tutor = tutor;
+    }
+    public void atualizarAnimal(Animal animalParaAtualizar){
+        if(animalParaAtualizar.getNome() != null){
+            this.nome = animalParaAtualizar.getNome();
+        } else if(animalParaAtualizar.getEspecie() != null){
+            this.especie = animalParaAtualizar.getEspecie();
+        } else if (animalParaAtualizar.getRaca() != null) {
+            this.raca = animalParaAtualizar.getRaca();
+        } else if (animalParaAtualizar.getTamanho() != null){
+            this.tamanho = animalParaAtualizar.getTamanho();
+        } else if (animalParaAtualizar.getIdade() > 0){
+            this.idade = animalParaAtualizar.getIdade();
+        } else if (animalParaAtualizar.getTutor() != null) {
+            this.tutor = animalParaAtualizar.getTutor();
+        }
     }
 
     public int getCodigo() {
@@ -70,6 +84,22 @@ public class Animal implements Serializable {
             throw new IllegalArgumentException("Idade não pode ser negativa");
         }
         this.idade = idade;
+    }
+
+    public Tamanho getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(Tamanho tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public Tutor getTutor() {
+        return tutor;
+    }
+
+    public void setTutor(Tutor tutor) {
+        this.tutor = tutor;
     }
 
     @Override

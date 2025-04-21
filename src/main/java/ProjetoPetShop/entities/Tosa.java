@@ -14,7 +14,6 @@ public class Tosa extends Servico{
         this.valoraAcc = valoraAcc;
         this.descricao = descricao;
     }
-
     @Override
     public double calcularValorTotal() {
         //Calcular o valor base com o acrescimo, caso tenha o acc na tosa apenas soma o valor do acc
@@ -42,6 +41,32 @@ public class Tosa extends Servico{
     @Override
     double calcularAcrescimo() {
         return super.valorBase*super.percentualAcrescimoTamanho;
+    }
+
+    @Override
+    public void atualizarServico(Servico servicoParaAtualziar) {
+        Tosa tosaParaAtualizar = (Tosa) servicoParaAtualziar;
+        if (tosaParaAtualizar.getId() > 0){
+            this.id = tosaParaAtualizar.getId();
+        } else if (tosaParaAtualizar.getAnimal() != null){
+            this.animal = tosaParaAtualizar.getAnimal();
+        } else if (tosaParaAtualizar.getDataMarcada() != null){
+            this.dataMarcada = tosaParaAtualizar.getDataMarcada();
+        } else if (tosaParaAtualizar.getTamanho() != null){
+            this.tamanho = tosaParaAtualizar.getTamanho();
+        } else if (tosaParaAtualizar.funcionario != null){
+            this.funcionario = tosaParaAtualizar.getFuncionario();
+        } else if (tosaParaAtualizar.getValorBase() > 0.0){
+            this.valorBase = tosaParaAtualizar.getValorBase();
+        } else if (tosaParaAtualizar.getPercentualAcrescimoTamanho() > 0.0){
+            this.percentualAcrescimoTamanho = tosaParaAtualizar.getPercentualAcrescimoTamanho();
+        } else if (tosaParaAtualizar.getValoraAcc() > 0.0){
+            this.valoraAcc = tosaParaAtualizar.valoraAcc;
+        } else if (tosaParaAtualizar.getDescricao() != null){
+            this.descricao = tosaParaAtualizar.getDescricao();
+        } else if (tosaParaAtualizar.adicionarAcc == true){
+            this.adicionarAcc = false;
+        }
     }
 
     public boolean isAdicionarAcc() {
